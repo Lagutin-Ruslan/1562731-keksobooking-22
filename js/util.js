@@ -1,5 +1,5 @@
 //первая функция
-const getRandom = (min, max) => {
+const getRandom = function (min, max) {
   if (min < 0 || max < 0) {
     return ('Введённое число должно быть больше либо равно 0!');
   } else if (max < min) {
@@ -12,7 +12,7 @@ const getRandom = (min, max) => {
 getRandom();
 
 //вторая функция
-const getRandomDecimal = (min, max, comma) => {
+const getRandomDecimal = function (min, max, comma) {
   if (min < 0 || max < 0) {
     return ('Введённое число должно быть больше либо равно 0!');
   } else if (max < min) {
