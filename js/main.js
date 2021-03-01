@@ -1,2 +1,2 @@
-import './create-offer.js';
-import './popup.js';
+import './data.js';
+import './map.js';

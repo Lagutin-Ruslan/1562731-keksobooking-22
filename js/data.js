@@ -54,10 +54,9 @@ const getRandomArrayElement = function (elements) {
   return elements[getRandom(0, elements.length - 1)];
 };
 
-let locationX = getRandomDecimal(35.65000, 35.70000, 5);
-let locationY = getRandomDecimal(139.70000, 139.80000, 5);
-
 const createOffer = function () {
+  let locationX = getRandomDecimal(35.65000, 35.70000, 5);
+  let locationY = getRandomDecimal(139.70000, 139.80000, 5);
   return {
     author: {
       avatar: 'img/avatars/user0' + getRandom(1, 8) + '.png',
@@ -76,8 +75,8 @@ const createOffer = function () {
       photos: createArr(OFFER_PHOTOS, 3),
     },
     location: {
-      x: locationX,
-      y: locationY,
+      lat: locationX,
+      lng: locationY,
     },
   };
 };
