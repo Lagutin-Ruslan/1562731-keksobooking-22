@@ -2,9 +2,15 @@
 /* global _:readonly */
 
 import {getData} from './api.js';
-import {filterOfferBox} from './filter.js';
+import {filterOffer} from './filter.js';
 
 const RERENDER_DELAY = 500;
+const TypeName = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+};
 
 const adForm = document.querySelector('.ad-form');
 const fieldsetAdForm = adForm.querySelectorAll('fieldset');
@@ -24,7 +30,7 @@ for (let i = 0; i < elementsMapFilters.length; i++) {
   elementsMapFilters[i].disabled = true;
 }
 
-//загрузка карты переводит формы в активное состояние
+
 const getMap = () => {
   mapBox.on('load', () => {
     adForm.classList.remove('ad-form--disabled');
@@ -53,7 +59,7 @@ const getMap = () => {
 }
 getMap();
 
-//getMap используем для reset
+
 const openstreetMap = getMap;
 
 const resetMapView = () => {
@@ -63,7 +69,7 @@ const resetMapView = () => {
   }, 10);
 };
 
-//добавляем главную метку
+
 const mainMarker = L.icon({
   iconUrl: '../img/main-pin.svg',
   iconSize: [52, 52],
@@ -86,19 +92,19 @@ marker.addTo(mapBox);
 address.setAttribute('readonly', 'readonly');
 address.value = '35.68950, 139.6920';
 
-//возврат главной метки при отправке + заполнение поля
+
 const updateMainMarker = () => {
   marker.setLatLng(['35.6895', '139.692']).update();
   address.value = '35.6895' + ', ' + '139.692';
 };
 
-//координаты метки и запись в поле 'адрес'
+
 marker.on('moveend', (evt) => {
   let getLatLng = evt.target.getLatLng();
   address.value = getLatLng.lat.toFixed(5) + ', ' + getLatLng.lng.toFixed(5);
 });
 
-//генерим несколько меток + проверяем их на отсутствие контента
+
 const similarOffer = (element) => {
   const newCard = card.cloneNode(true);
 
@@ -187,18 +193,11 @@ const similarOffer = (element) => {
     popupAvatar.src = element.author.avatar;
   }
 
-  //перевод тип жилья на русский
-  const TYPE_NAMES = {
-    flat: 'Квартира',
-    bungalow: 'Бунгало',
-    house: 'Дом',
-    palace: 'Дворец',
-  };
 
   const changeTypeName = () => {
-    Object.keys(TYPE_NAMES).forEach((value) => {
+    Object.keys(TypeName).forEach((value) => {
       if (element.offer.type === value) {
-        newCard.querySelector('.popup__type').textContent = TYPE_NAMES[`${value}`];
+        newCard.querySelector('.popup__type').textContent = TypeName[`${value}`];
       }
     });
   }
@@ -208,7 +207,7 @@ const similarOffer = (element) => {
 
 let regularMarkers = [];
 const getOffer = (data) => {
-  filterOfferBox(data)
+  filterOffer(data)
     .forEach((element) => {
       const pinMarker = L.icon({
         iconUrl: '../img/pin.svg',

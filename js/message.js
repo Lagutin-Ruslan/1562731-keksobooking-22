@@ -9,7 +9,7 @@ const setMessage = document.querySelector('#success').content.querySelector('.su
 const errMessage = document.querySelector('#error').content.querySelector('.error');
 const buttonErrMessage = errMessage.querySelector('.error__button');
 
-//Сообщение об успешном создании объявления
+
 function onSuccessMessage (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
@@ -34,13 +34,10 @@ const successMessage = () => {
   capacity.value = '3';
   inputPrice.setAttribute('placeholder', '1 000');
   validationForm();
-  let deleteImg = previewPhotos.querySelectorAll('img');
-  for (let i = 0; i < deleteImg.length; i++) {
-    deleteImg[i].remove();
-  }
+  previewPhotos.style.backgroundImage = '';
 };
 
-//Сообщение об ошибке создания объявления
+
 function onErrorMessage (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
@@ -62,7 +59,7 @@ const errorMessage = () => {
   });
 };
 
-//Сообщение об ошибке при загрузке инфы с сайта
+
 const showAlert = (message) => {
   let alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
