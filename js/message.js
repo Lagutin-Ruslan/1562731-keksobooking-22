@@ -1,55 +1,69 @@
-import {adForm, mapFilters, updateMarker} from './map.js';
+import {adForm, mapFilters, updateMainMarker, resetMapView, resetMarkers} from './map.js';
+import {previewAvatar, previewPhotos} from './images-preview.js';
+import {capacity, validationForm, inputPrice} from './validator.js';
+
+const ALERT_SHOW_TIME = 5000;
+
+const main = document.querySelector('main');
+const setMessage = document.querySelector('#success').content.querySelector('.success');
+const errMessage = document.querySelector('#error').content.querySelector('.error');
+const buttonErrMessage = errMessage.querySelector('.error__button');
 
 //Сообщение об успешном создании объявления
-let main = document.querySelector('main');
-let setMessage = document.querySelector('#success').content.querySelector('.success');
-
-let successMessage = () => {
-  let newSetMessage = setMessage.cloneNode(true);
+function onSuccessMessage (evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    document.querySelector('.success').remove();
+  }
+}
+const successMessage = () => {
+  const newSetMessage = setMessage.cloneNode(true);
   newSetMessage.style.zIndex = 1000;
   main.appendChild(newSetMessage);
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      evt.preventDefault();
-      newSetMessage.classList.add('hidden');
-    }
-  });
+  document.addEventListener('keydown', onSuccessMessage);
   newSetMessage.addEventListener('click', (evt) => {
     evt.preventDefault();
-    newSetMessage.classList.add('hidden');
+    document.querySelector('.success').remove();
   });
   adForm.reset();
   mapFilters.reset();
-  updateMarker();
+  updateMainMarker();
+  resetMapView();
+  resetMarkers();
+  previewAvatar.src = 'img/muffin-grey.svg';
+  capacity.value = '3';
+  inputPrice.setAttribute('placeholder', '1 000');
+  validationForm();
+  let deleteImg = previewPhotos.querySelectorAll('img');
+  for (let i = 0; i < deleteImg.length; i++) {
+    deleteImg[i].remove();
+  }
 };
 
 //Сообщение об ошибке создания объявления
-let errMessage = document.querySelector('#error').content.querySelector('.error');
-let buttonErrMessage = errMessage.querySelector('.error__button');
-
-let errorMessage = () => {
-  let newErrMessage = errMessage.cloneNode(true);
+function onErrorMessage (evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    evt.preventDefault();
+    document.querySelector('.error').remove();
+  }
+}
+const errorMessage = () => {
+  const newErrMessage = errMessage.cloneNode(true);
   newErrMessage.style.zIndex = 1000;
   main.appendChild(newErrMessage);
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
-      evt.preventDefault();
-      newErrMessage.classList.add('hidden');
-    }
-  });
+  document.addEventListener('keydown', onErrorMessage);
   newErrMessage.addEventListener('click', (evt) => {
     evt.preventDefault();
-    newErrMessage.classList.add('hidden');
+    document.querySelector('.error').remove();
   });
   buttonErrMessage.addEventListener('click', (evt) => {
     evt.preventDefault();
-    newErrMessage.classList.add('hidden');
+    document.querySelector('.error').remove();
   });
 };
 
 //Сообщение об ошибке при загрузке инфы с сайта
-const ALERT_SHOW_TIME = 5000;
-let showAlert = (message) => {
+const showAlert = (message) => {
   let alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';

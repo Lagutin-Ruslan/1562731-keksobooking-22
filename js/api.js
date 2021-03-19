@@ -1,6 +1,6 @@
 import {showAlert} from './message.js';
 
-let checkStatus = (response) => {
+const checkStatus = (response) => {
   if (response.ok) {
     return response;
   }
@@ -19,7 +19,7 @@ const getData = (onSuccess) => {
 };
 //POST
 
-let sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, body) => {
   fetch('https://22.javascript.pages.academy/keksobooking',
     {
       method: 'POST',
