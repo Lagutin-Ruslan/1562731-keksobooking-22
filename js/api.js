@@ -7,7 +7,8 @@ const checkStatus = (response) => {
   let {statusText, status} = response;
   throw new Error(`${status} — ${statusText}`);
 }
-//GET
+
+
 const getData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
     .then (checkStatus)
@@ -17,7 +18,7 @@ const getData = (onSuccess) => {
     })
     .catch((error) => showAlert(error));
 };
-//POST
+
 
 const sendData = (onSuccess, onFail, body) => {
   fetch('https://22.javascript.pages.academy/keksobooking',

@@ -13,14 +13,13 @@ const capacity = document.querySelector('#capacity');
 const optionCapacity = capacity.querySelectorAll('option');
 
 
-// поле title
+
 inputTitle.addEventListener('input', () => {
   inputTitle.reportValidity();
 });
 
-// поле type и внури поле price
-inputPrice.setAttribute('placeholder', '1 000');
 
+inputPrice.setAttribute('placeholder', '1 000');
 inputType.addEventListener('change', (evt) => {
   const newType = evt.target.value;
   if (newType === 'bungalow') {
@@ -35,7 +34,6 @@ inputType.addEventListener('change', (evt) => {
 });
 
 inputPrice.addEventListener('input', () => {
-
   if (inputPrice.value > MAX_PRICE) {
     inputPrice.setCustomValidity('Максимальное значение — 1 000 000.');
   } else if (inputType.value === 'flat' && inputPrice.value < MIN_PRICE_FLAT) {
@@ -50,7 +48,7 @@ inputPrice.addEventListener('input', () => {
   inputPrice.reportValidity();
 });
 
-//поле timein/timeout
+
 timeIn.onchange = (evt) => {
   timeIn.value = evt.target.value
   timeOut.value = evt.target.value
@@ -60,7 +58,7 @@ timeOut.onchange = (evt) => {
   timeOut.value = evt.target.value
 }
 
-//поле room_number/capacity
+
 const validationForm = () => {
   roomNumber.addEventListener('change', (evt) => {
     if (evt.target.value === '1') {

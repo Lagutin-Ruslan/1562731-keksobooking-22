@@ -9,10 +9,10 @@ const guestsField = document.querySelector('[name="housing-guests"]');
 const houseFeatures = document.querySelector('#housing-features');
 
 
-const filterOfferBox = (offers) => {
-  const filterArray = []
+const filterOffer = (offers) => {
+  const filterOfferArray = []
   offers.some((element) => {
-    if (filterArray.length === DRAW_LIMITER) {
+    if (filterOfferArray.length === DRAW_LIMITER) {
       return true;
     }
     if (typeFilter(element, typeField.value)
@@ -20,11 +20,11 @@ const filterOfferBox = (offers) => {
     && roomsFilter(element, roomsField.value)
     && guestsFilter(element, guestsField.value)
     && featuresFilter(element)) {
-      filterArray.push(element);
+      filterOfferArray.push(element);
       return false
     }
   });
-  return filterArray;
+  return filterOfferArray;
 }
 
 const typeFilter = (checkOffer, currentType) => {
@@ -85,4 +85,4 @@ const featuresFilter = (element) => {
   });
 };
 
-export {filterOfferBox};
+export {filterOffer};
