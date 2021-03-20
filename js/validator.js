@@ -59,60 +59,33 @@ timeOut.onchange = (evt) => {
 }
 
 
-const validationForm = () => {
-  roomNumber.addEventListener('change', (evt) => {
-    if (evt.target.value === '1') {
-      optionCapacity.forEach((element) => {
-        element.disabled = false;
-        element.setAttribute('selected', 'selected')
-        if (element.value !== '1') {
-          element.disabled = true;
-          element.removeAttribute('selected');
-        } else {
-          element.disabled = false;
-          element.removeAttribute('selected');
-        }
-      });
-    } else if (evt.target.value === '2') {
-      optionCapacity.forEach((element) => {
-        element.disabled = false;
-        element.setAttribute('selected', 'selected');
-        if (element.value !== '2' && element.value !== '1') {
-          element.disabled = true;
-          element.removeAttribute('selected');
-        } else {
-          element.disabled = false;
-          element.removeAttribute('selected');
-        }
-      });
-    } else if (evt.target.value === '3') {
-      optionCapacity.forEach((element) => {
-        element.disabled = false;
-        element.setAttribute('selected', 'selected');
-        if (element.value !== '3' && element.value !== '2' && element.value !== '1') {
-          element.disabled = true;
-          element.removeAttribute('selected');
-        } else {
-          element.disabled = false;
-          element.removeAttribute('selected');
-        }
-      });
-    } else if (evt.target.value === '100') {
-      optionCapacity.forEach((element) => {
-        element.disabled = false;
-        element.setAttribute('selected', 'selected');
-        if (element.value !== '0') {
-          element.disabled = true;
-          element.removeAttribute('selected');
-        } else {
-          element.disabled = false;
-          element.removeAttribute('selected');
-        }
-      });
+const replacingAttribute = () => {
+  optionCapacity.forEach((element) => {
+    element.removeAttribute('selected');
+    if (element.value === '1') {
+      element.setAttribute('selected', 'selected');
+    } else {
+      element.removeAttribute('selected');
     }
-    capacity.reportValidity();
   });
-};
-validationForm();
+}
+replacingAttribute();
 
-export {capacity, validationForm, inputPrice};
+const onRoomNumberChange = function(){
+  if (capacity.value === '0' && roomNumber.value !== '100') {
+    capacity.setCustomValidity('Данное количество гостей может расположиться в 100 комнатах')
+  } else if (capacity.value === '1' && roomNumber.value === '100') {
+    capacity.setCustomValidity('Данное количество гостей может расположиться в 1, 2 или 3 комнате')
+  } else if (capacity.value === '2' && (roomNumber.value === '1' || roomNumber.value === '100')) {
+    capacity.setCustomValidity('Данное количество гостей может расположиться в 2 или 3 комнатах')
+  } else if (capacity.value === '3' && roomNumber.value !== '3') {
+    capacity.setCustomValidity('Данное количество гостей может расположиться в 3 комнатах')
+  } else {
+    capacity.setCustomValidity('')
+  }
+  capacity.reportValidity();
+};
+capacity.addEventListener('change', onRoomNumberChange);
+roomNumber.addEventListener('change', onRoomNumberChange);
+
+export {inputPrice, replacingAttribute};

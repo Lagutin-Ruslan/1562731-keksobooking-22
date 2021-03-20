@@ -2,7 +2,7 @@ import {successMessage, errorMessage} from './message.js';
 import {adForm, updateMainMarker, mapFilters, resetMapView, resetMarkers} from './map.js';
 import {sendData} from './api.js';
 import {previewAvatar, previewPhotos} from './images-preview.js';
-import {capacity, validationForm, inputPrice} from './validator.js';
+import {inputPrice, replacingAttribute} from './validator.js';
 
 const adFormReset = adForm.querySelector('.ad-form__reset');
 
@@ -30,8 +30,7 @@ adFormReset.addEventListener('click', (evt) => {
   adForm.reset();
   updateMainMarker();
   previewAvatar.src = 'img/muffin-grey.svg';
-  capacity.value = '3';
   inputPrice.setAttribute('placeholder', '1 000');
-  validationForm();
   previewPhotos.style.backgroundImage = '';
+  replacingAttribute();
 });

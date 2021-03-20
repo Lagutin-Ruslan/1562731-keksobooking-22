@@ -1,6 +1,6 @@
 import {adForm, mapFilters, updateMainMarker, resetMapView, resetMarkers} from './map.js';
 import {previewAvatar, previewPhotos} from './images-preview.js';
-import {capacity, validationForm, inputPrice} from './validator.js';
+import {inputPrice, replacingAttribute} from './validator.js';
 
 const ALERT_SHOW_TIME = 5000;
 
@@ -31,10 +31,9 @@ const successMessage = () => {
   resetMapView();
   resetMarkers();
   previewAvatar.src = 'img/muffin-grey.svg';
-  capacity.value = '3';
   inputPrice.setAttribute('placeholder', '1 000');
-  validationForm();
   previewPhotos.style.backgroundImage = '';
+  replacingAttribute();
 };
 
 
