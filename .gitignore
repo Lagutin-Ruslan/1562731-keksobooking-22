@@ -5,8 +5,8 @@
 *.pdf
 *.psd
 *.sublime*
-build/js
 node_modules/
+build/js
 npm-debug.log*
 Thumbs.db
 .vscode/
