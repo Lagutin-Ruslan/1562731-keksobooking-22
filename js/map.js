@@ -105,7 +105,7 @@ marker.on('moveend', (evt) => {
 });
 
 
-const similarOffer = (element) => {
+const makeSimilarOffer = (element) => {
   const newCard = card.cloneNode(true);
 
   const popupTitle = newCard.querySelector('.popup__title');
@@ -217,7 +217,7 @@ const getOffer = (data) => {
       const pin = L.marker(element.location, {
         icon: pinMarker,
       });
-      pin.addTo(mapBox).bindPopup(similarOffer(element), {
+      pin.addTo(mapBox).bindPopup(makeSimilarOffer(element), {
         keepInView: true,
       });
       regularMarkers.push(pin);
@@ -243,4 +243,4 @@ getData(
 
 const resetMarkers = () => getOffer(data);
 
-export {similarOffer, adForm, updateMainMarker, mapFilters, resetMapView, resetMarkers};
+export {adForm, updateMainMarker, mapFilters, resetMapView, resetMarkers};

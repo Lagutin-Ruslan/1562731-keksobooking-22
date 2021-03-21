@@ -14,6 +14,7 @@ function onSuccessMessage (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
     document.querySelector('.success').remove();
+    document.removeEventListener('keydown', onSuccessMessage);
   }
 }
 const successMessage = () => {
@@ -24,6 +25,8 @@ const successMessage = () => {
   newSetMessage.addEventListener('click', (evt) => {
     evt.preventDefault();
     document.querySelector('.success').remove();
+    document.removeEventListener('keydown', onSuccessMessage);
+    newSetMessage.removeEventListener('click', onSuccessMessage);
   });
   adForm.reset();
   mapFilters.reset();
@@ -41,6 +44,7 @@ function onErrorMessage (evt) {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
     document.querySelector('.error').remove();
+    document.removeEventListener('keydown', onErrorMessage);
   }
 }
 const errorMessage = () => {
@@ -51,10 +55,13 @@ const errorMessage = () => {
   newErrMessage.addEventListener('click', (evt) => {
     evt.preventDefault();
     document.querySelector('.error').remove();
+    document.removeEventListener('keydown', onErrorMessage);
+    newErrMessage.removeEventListener('click', onErrorMessage);
   });
   buttonErrMessage.addEventListener('click', (evt) => {
     evt.preventDefault();
     document.querySelector('.error').remove();
+    buttonErrMessage.removeEventListener('click', onErrorMessage);
   });
 };
 
